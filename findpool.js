@@ -3,11 +3,12 @@ const {
   abi: UniswapV3Factory,
 } = require("@uniswap/v3-core/artifacts/contracts/UniswapV3Factory.sol/UniswapV3Factory.json");
 
-const INFURA_URL_TESTNET = "YOUR_INFURA_API_KEY";
+const INFURA_URL_TESTNET = "YOUR_INFURA_ENDPOINT_URL";
 
-const address0 = "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6";
-const address1 = "0x059197f0D43e7E32faCa5a261d41Fb5dC6bE6986";
+const address0 = "ADDRESS_OF_FIRST_TOKEN_IN_THE_POOL";
+const address1 = "ADDRESS_OF_SECOND_TOKEN_IN_THE_POOL";
 const factoryAddress = "0x1F98431c8aD98523631AE4a59f267346ea31F984";
+const fee = 3000; // OPTIONS: 500, 3000 or 10000
 
 async function main() {
   const provider = new ethers.providers.JsonRpcProvider(INFURA_URL_TESTNET);
@@ -18,7 +19,7 @@ async function main() {
     provider
   );
 
-  const poolAddress = await factoryContract.getPool(address0, address1, 3000);
+  const poolAddress = await factoryContract.getPool(address0, address1, fee);
   console.log("poolAddress", poolAddress);
 }
 
